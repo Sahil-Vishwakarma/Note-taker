@@ -19,10 +19,14 @@ app.get('/', (req, res) => {
 })
 
 app.post('/create', (req, res) => {
-    const fileName = req.body.title.split(' ')
+    if (!req.body.title || !req.body.details) {
+        return res.status(400).send('Title and details are required');
+    }
+    const fileName = req.body.title.trim()
+                        .split(' ')
                         .map((word) => word[0].toUpperCase() + word.slice(1))
                         .join('');
-    fs.writeFile(`./files/${fileName}.txt`, req.body.details, (err) => {
+    fs.writeFile(`./files/${fileName}.txt`, req.body.details.trim(), (err) => {
         if (err) {
             console.error(err);
             return res.status(500).send('Error creating file');
