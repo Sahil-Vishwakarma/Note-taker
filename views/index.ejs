@@ -26,10 +26,14 @@
             </form>
             <div class="tasks flex gap-3 mt-10 flex-wrap">
                 <% files.forEach((val) => { %>
-                <div class="task bg-zinc-800 w-72 rounded-md px-3 py-3">
+                <div class="task bg-zinc-800 min-w-72 rounded-md px-3 py-3">
                     <h1 class="text-3xl tracking-tighter"><%=val%></h1>
-                    <a class="text-xl font-light text-blue-500"
-                        href="/file/<%=val%>">Read more</a>
+                    <div class="flex justify-between mt-3">
+                        <a class="text-xl font-light text-blue-500"
+                            href="/file/<%=val%>">Read more</a>
+                        <a class="text-xl font-light text-zinc-500"
+                            href="/edit/<%=val%>">edit</a>
+                    </div>
                 </div>
                 <% })%>
             </div>
