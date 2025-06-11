@@ -2,6 +2,7 @@ const express = require('express')
 const app = express();
 const path = require('path')
 const fs = require('fs');
+const userModel = require('./mongoose.js');
 
 app.use(express.json());
 app.use(express.urlencoded({extended : true}))
@@ -82,5 +83,14 @@ app.post('/edit/done/:filename', (req, res) => {
         });
     });
 });
+
+
+app.get('/createUser', async (req, res) => {
+    let createdUser = await userModel.create({  
+        title : "Sahil",
+        details : "This is a test user"
+    })
+    res.send(createdUser);
+})
 
 app.listen(3000);
